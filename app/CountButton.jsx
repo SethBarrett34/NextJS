@@ -1,20 +1,24 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react";
 
-export default function CountButon() {
-    let [count, setCount] = useState(0)
-    function handleClick() {
-        setCount(count + 1)
+export default function CountButton({ step }) {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + step);
+  }
+
+  function rollOverCount() {
+    if (count > 10) {
+      setCount(0);
     }
-    function rollOverCount() {
-        if (count > 10) {
-            setCount(0)
-        }
-    }
-    useEffect(rollOverCount, [count])
-    return (
-      <div>
-  <button onClick={handleClick}> +1</button>
-    <div>{count}</div>
+  }
+
+  useEffect(rollOverCount, [count]);
+
+  return (
+    <div>
+      <button onClick={handleClick}>+{step}</button>
+      <div>{count}</div>
     </div>
-    )
+  );
 }
